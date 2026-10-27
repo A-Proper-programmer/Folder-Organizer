@@ -18,19 +18,21 @@ def gtcwd(_f):
         return os.path.dirname(__file__)
 
 def main(_f, _i):
-    # CWD
-    gtcwd(_f)
+    global DUPES, REPORT
+    
+    gtcwd(_f) # CWD
 
     # FOLDER ORGANIZER
     directories = os.listdir()
     folders = [i for i in directories if os.path.isdir(os.path.join(os.getcwd(), i))]
-    report = {}
     hashes = []
-    dupes = 0
 
     for item in directories:
-        if ((not _i) and (item==os.path.basename(__file__))) or (not os.path.isfile(item)):
+        if ((not _i) and (item==os.path.basename(__file__))) or (not os.path.isfile(item)) or (item == "README.md"):
             continue
+        if len(item)>20:
+            if item[:14] == "Summary log at":
+                continue
         
         with open(item, "rb") as file:
             file_hash = hashlib.file_digest(file, "sha256").hexdigest()
@@ -38,7 +40,7 @@ def main(_f, _i):
             if "Duplicate files" not in folders:
                 os.mkdir("Duplicate files")
             shutil.move(os.path.join(os.getcwd(), item), os.path.join(os.getcwd(), "Duplicate files", item))
-            dupes += 1
+            DUPES += 1
             continue
         else:
             hashes += [file_hash]
@@ -51,29 +53,31 @@ def main(_f, _i):
             folders += [fldr_name]
         shutil.move(os.path.join(os.getcwd(), item), os.path.join(os.getcwd(), fldr_name, item))
 
-        if not extension[1:] in list(report.keys()):
-            report[extension[1:]] = 0
-        report[extension[1:]] += 1
+        if not extension[1:] in list(REPORT.keys()):
+            REPORT[extension[1:]] = 0
+        REPORT[extension[1:]] += 1
 
-    # REPORT MAKER
 
-    time = datetime.datetime.now()
-    with open(str("Summary log at "+time.strftime("%d%m%Y%H%M%S"))+".txt", "w") as file:
-        file.write(f"This is report of the files organized on {time}.\n\n")
-        if not report:
-                file.write("No files were organized.\n\n")
-        else:
-            file.write(f"A total of {sum(list(report.values()))} files were organized.\n\n")
-            for i in report:
-                file.write(f"Number of {i} files organized: {report[i]}\n")
+REPORT = {}
+DUPES = 0
 
-        if not dupes:
-            file.write("\nNo duplicate files were found.\n\n")
-        else:
-            file.write(f"\n{dupes} duplicate files were found and moved to 'Duplicate files'.\n\n")
-
-gtcwd(args.folder)
+orig_cwd = gtcwd(args.folder)
 sd = [os.getcwd()]+[os.path.join(_r, s) for _r, sub, _f in os.walk(os.getcwd()) for s in sub if s[0]!="."]
-
 for __f in sd:
     main(gtcwd(__f), args.inclpy)
+
+os.chdir(orig_cwd)
+time = datetime.datetime.now()
+with open(str("Summary log at "+time.strftime("%d%m%Y%H%M%S"))+".txt", "w") as file:
+    file.write(f"This is report of the files organized on {time}.\n\n")
+    if not REPORT:
+            file.write("No files were organized.\n\n")
+    else:
+        file.write(f"A total of {sum(list(REPORT.values()))} files were organized.\n\n")
+        for i in REPORT:
+            file.write(f"Number of {i} files organized: {REPORT[i]}\n")
+
+    if not DUPES:
+        file.write("\nNo duplicate files were found.\n\n")
+    else:
+        file.write(f"\n{DUPES} duplicate files were found and moved to 'Duplicate files'.\n\n")
