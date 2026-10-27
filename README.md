@@ -4,13 +4,14 @@ A lightweight, automated Python utility designed to clean up cluttered directori
 
 ## Features
 
-* **Extension-Based Sorting:** Automatically groups files into clean, categorized directories (e.g., `.pdf` to '/.pdf files', `.png` to `.png files`).
+* **Extension-Based Sorting:** Automatically groups files into clean, categorized directories (e.g., `.pdf` to `/.pdf files`, `.png` to `.png files`).
+* **Logging:** Add logging functionality to keep track of moved files.
 * **Deduplication:** Scans files to identify and isolate duplicate files to save disk space.
 * **Safe Operations:** Minimizes data loss risks by isolating duplicates rather than deleting them outright.
 
 ## Built With
 
-* **Python 3.x**
+* **Python 3.11.3**
 * `os` & `shutil` (Standard libraries for file manipulation)
 * `hashlib` (For cryptographic file hashing to accurately spot duplicates)
 
@@ -18,22 +19,15 @@ A lightweight, automated Python utility designed to clean up cluttered directori
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com
+   git clone https://github.com <URL>
    cd Folder-Organizer
-   ```
-
-2. **(Optional) Set Up a Virtual Environment:**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
-   ```
-
+   
 ## Usage
 
 Run the script from your terminal by providing the path to the directory you want to clean up:
 
 ```bash
-python organizer.py --path "/path/to/your/cluttered/folder"
+FolderOrganizer.py --folder "/path/to/your/cluttered/folder"
 ```
 
 ### Example Before & After
@@ -50,22 +44,18 @@ Downloads/
 **After running the script:**
 ```text
 Downloads/
-├── Documents/
+├── .pdf files/
 │   └── invoice.pdf
-├── Images/
+├── .png files/
 │   └── photo.png
-├── TextFiles/
+├── .txt files/
 │   └── notes.txt
-└── Duplicates/
+└── Duplicate files/
     └── invoice_copy.pdf
 ```
 
 ## Roadmap & Future Enhancements
 
-- [ ] Add a visual Graphical User Interface (GUI) using Tkinter.
-- [ ] Add logging functionality (`logging` module) to keep track of moved files.
-- [ ] Implement a dry-run feature (`--dry-run`) to preview sorting actions without moving files.
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+- [ ] Manage situations with password-protected files
+- [ ] Try to group file based on type of file (image, video) instead of raw extensions.
+- [ ] Handle situations where file-to-be-organized has the same name as an already organized file.
