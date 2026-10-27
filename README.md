@@ -4,9 +4,8 @@ A lightweight, automated Python utility designed to clean up cluttered directori
 
 ## Features
 
-* **Extension-Based Sorting:** Automatically groups files into clean, categorized directories (e.g., `.pdf` to `/Documents`, `.png` to `/Images`).
+* **Extension-Based Sorting:** Automatically groups files into clean, categorized directories (e.g., `.pdf` to '/.pdf files', `.png` to `.png files`).
 * **Deduplication:** Scans files to identify and isolate duplicate files to save disk space.
-* **Custom Mapping:** Easily configurable file-to-folder mapping rules.
 * **Safe Operations:** Minimizes data loss risks by isolating duplicates rather than deleting them outright.
 
 ## Built With
