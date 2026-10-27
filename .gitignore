@@ -1,0 +1,11 @@
+# Ignore all folders created by the script (e.g., .txt files/, .png files/)
+* files/
+*/
+
+# Ignore Python's automatic cache folders
+__pycache__/
+
+# BUT explicitly keep your script and readme safe
+!*.py
+!README.md
+!.gitignore
