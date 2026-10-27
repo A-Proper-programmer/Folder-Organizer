@@ -5,7 +5,7 @@
 # Ignore Python's automatic cache folders
 __pycache__/
 
-# BUT explicitly keep your script and readme safe
+# BUT explicitly keep python script and readme safe
 !*.py
 !README.md
 !.gitignore
