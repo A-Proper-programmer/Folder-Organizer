@@ -19,7 +19,7 @@ A lightweight, automated Python utility designed to clean up cluttered directori
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com <URL>
+   git clone https://github.com/A-Proper-programmer/Folder-Organizer
    cd Folder-Organizer
    
 ## Usage
