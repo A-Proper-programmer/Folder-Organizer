@@ -8,6 +8,7 @@ A lightweight, automated Python utility designed to clean up cluttered directori
 * **Logging:** Add logging functionality to keep track of moved files.
 * **Deduplication:** Scans files to identify and isolate duplicate files to save disk space.
 * **Safe Operations:** Minimizes data loss risks by isolating duplicates rather than deleting them outright.
+* **Categorical Organization:** Now tries to organize by category, instead of only using raw extension.
 
 ## Built With
 
@@ -57,5 +58,4 @@ Downloads/
 ## Roadmap & Future Enhancements
 
 - [ ] Manage situations with password-protected files
-- [ ] Try to group file based on type of file (image, video) instead of raw extensions.
 - [ ] Handle situations where file-to-be-organized has the same name as an already organized file.
