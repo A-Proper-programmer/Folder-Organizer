@@ -18,7 +18,7 @@ def gtcwd(_f):
         return os.path.dirname(__file__)
 
 def main(_f, _i):
-    global DUPES, REPORT
+    global DUPES, REPORT, FILE_TYPE
     
     gtcwd(_f) # CWD
 
@@ -46,7 +46,11 @@ def main(_f, _i):
             hashes += [file_hash]
 
         _, extension = os.path.splitext(item)
-        fldr_name = extension+" files"
+        fldr_name = extension + " files"
+        for category, extensions in FILE_TYPE.items():
+            if extension in extensions:
+                fldr_name = category + " files"
+                break
 
         if fldr_name not in folders:
             os.mkdir(fldr_name)
@@ -60,6 +64,16 @@ def main(_f, _i):
 
 REPORT = {}
 DUPES = 0
+
+# GOOGLED
+FILE_TYPE = {
+    "Image": [".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".svg"],
+    "Audio": [".mp3", ".wav", ".aac", ".flac", ".wma", ".ogg"],
+    "Video": [".mp4", ".avi", ".mov", ".wmv", ".mkv", ".flv"],
+    "Text & Document":[".txt", ".docx", ".pdf", ".rtf", ".odt", ".xlsx"],
+    "Compressed":[ ".zip", ".rar", ".7z", ".tar", ".gz"],
+    "Executable & Script":[ ".exe", ".bat", ".sh", ".jar", ".com"],
+    "Web":[".html", ".css", ".js", ".php", ".asp"]}
 
 orig_cwd = gtcwd(args.folder)
 sd = [os.getcwd()]+[os.path.join(_r, s) for _r, sub, _f in os.walk(os.getcwd()) for s in sub if s[0]!="."]
