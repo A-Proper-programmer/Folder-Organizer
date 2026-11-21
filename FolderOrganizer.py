@@ -39,6 +39,7 @@ def main(_f, _i):
         if file_hash in hashes:
             if "Duplicate files" not in folders:
                 os.mkdir("Duplicate files")
+                folders += ["Duplicate files"]
             shutil.move(os.path.join(os.getcwd(), item), os.path.join(os.getcwd(), "Duplicate files", item))
             DUPES += 1
             continue
